@@ -37,11 +37,6 @@ body {
     background-color: white;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.5s;
-}
-
-.form-container:hover {
-    transform: scale(1.05);
 }
 
 h2 {
