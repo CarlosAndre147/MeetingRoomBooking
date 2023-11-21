@@ -1,28 +1,34 @@
-// Importa a conexão com o banco de dados
-const db = require('../db');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
+const Client = require('../models/clientsModel');
+const MeetingRoom = require('../models/meetingRoomModel');
 
-// Define o modelo da reserva
-const Reservation = {
-  // Função para obter todas as reservas do banco de dados
-  getAll: (callback) => {
-    db.query('SELECT * FROM reservations', callback);
+const Reservation = sequelize.define('Reservation', {
+  id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    autoIncrement: true,
+    primaryKey: true,
   },
+  date: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  clientId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'client_id', // Match the field name in the database
+  },
+  meetingRoomId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: 'meeting_room_id', // Match the field name in the database
+  },
+});
 
-  // Função para obter uma reserva pelo ID
-  getById: (id, callback) => {
-    db.query('SELECT * FROM reservations WHERE id = ?', [id], callback);
-  },
-
-  // Função para criar uma nova reserva
-  create: (newReservation, callback) => {
-    db.query('INSERT INTO reservations SET ?', newReservation, callback);
-  },
-
-  // Função para atualizar uma reserva existente
-  update: (id, updatedReservation, callback) => {
-    db.query('UPDATE reservations SET ? WHERE id = ?', [updatedReservation, id], callback);
-  },
-};
+// Define foreign key associations
+Reservation.belongsTo(Client, { foreignKey: 'clientId', as: 'client' });
+Reservation.belongsTo(MeetingRoom, { foreignKey: 'meetingRoomId', as: 'meetingRoom' });
 
 // Exporta o modelo da reserva para ser utilizado em outros módulos
 module.exports = Reservation;

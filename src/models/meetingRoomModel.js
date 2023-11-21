@@ -1,28 +1,28 @@
 // Importa a conexão com o banco de dados
-const db = require('../db');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
 // Define o modelo da sala de reunião
-const MeetingRoom = {
-  // Função para obter todas as salas de reunião do banco de dados
-  getAll: (callback) => {
-    db.query('SELECT * FROM meeting_rooms', callback);
+const MeetingRoom = sequelize.define('meeting_rooms', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
   },
-
-  // Função para obter uma sala de reunião pelo ID
-  getById: (id, callback) => {
-    db.query('SELECT * FROM meeting_rooms WHERE id = ?', [id], callback);
+  name: {
+    type: DataTypes.STRING(250),
+    allowNull: false,
   },
-
-  // Função para criar uma nova sala de reunião
-  create: (newMeetingRoom, callback) => {
-    db.query('INSERT INTO meeting_rooms SET ?', newMeetingRoom, callback);
+  capacity: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
-
-  // Função para atualizar uma sala de reunião existente
-  update: (id, updatedMeetingRoom, callback) => {
-    db.query('UPDATE meeting_rooms SET ? WHERE id = ?', [updatedMeetingRoom, id], callback);
+  localization: {
+    type: DataTypes.STRING(250),
+    allowNull: false,
   },
-};
+});
 
 // Exporta o modelo da sala de reunião para ser utilizado em outros módulos
 module.exports = MeetingRoom;

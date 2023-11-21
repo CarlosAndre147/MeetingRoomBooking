@@ -1,62 +1,55 @@
-
 // Importa o modelo da sala de reunião
 const MeetingRoom = require('../models/meetingRoomModel');
 
 // Controlador para lidar com as operações relacionadas às salas de reunião
 const MeetingRoomController = {
   // Obtém todas as salas de reunião
-  getAllMeetingRooms: (req, res) => {
-    MeetingRoom.getAll((error, results) => {
-      if (error) {
-        res.status(500).json({ error: 'Erro ao obter as salas de reunião.' });
-        return;
-      }
-      res.status(200).json(results);
-    });
+  getAllMeetingRooms: async (req, res) => {
+    try {
+      const meetingRooms = await MeetingRoom.findAll();
+      res.status(200).json(meetingRooms);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   },
-
   // Obtém uma sala de reunião pelo ID
-  getMeetingRoomById: (req, res) => {
-    const roomId = req.params.id;
-    MeetingRoom.getById(roomId, (error, results) => {
-      if (error) {
-        res.status(500).json({ error: 'Erro ao obter a sala de reunião.' });
-        return;
+  getMeetingRoomById: async (req, res) => {
+    try {
+      const roomId = req.params.id;
+      const meetingRoom = await MeetingRoom.findByPk(roomId);
+      if (meetingRoom == null) {
+        res.status(404).json({message: 'Meeting room not found'});
+      } else {
+        res.status(200).json(meetingRoom);
       }
-
-      if (results.length === 0) {
-        res.status(404).json({ message: 'Sala de reunião não encontrada.' });
-        return;
-      }
-
-      res.status(200).json(results[0]);
-    });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   },
-
   // Cria uma nova sala de reunião
-  createMeetingRoom: (req, res) => {
-    const newMeetingRoom = req.body;
-    MeetingRoom.create(newMeetingRoom, (error, results) => {
-      if (error) {
-        res.status(500).json({ error: 'erro ao criar sala de reunião.' });
-        return;
-      }
-      res.status(201).json({ message: 'Sala de reunião criada com sucesso.', roomId: results.insertId });
-    });
+  createMeetingRoom: async (req, res) => {
+    try {
+      const newMeetingRoom = req.body;
+      const meetingRoom = await MeetingRoom.create(newMeetingRoom);
+      res.status(200).json(meetingRoom);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   },
-
   // Atualiza uma sala de reunião existente
-  updateMeetingRoom: (req, res) => {
-    const roomId = req.params.id;
-    const updatedMeetingRoom = req.body;
-
-    MeetingRoom.update(roomId, updatedMeetingRoom, (error) => {
-      if (error) {
-        res.status(500).json({ error: 'Erro ao atualizar a sala de reunião.' });
-        return;
-      }
+  updateMeetingRoom: async (req, res) => {
+    try {
+      const roomId = req.params.id;
+      const updatedMeetingRoom = req.body;
+      await MeetingRoom.update(updatedMeetingRoom, {where: {id: roomId}});
       res.status(200).json({ message: 'Sala de reunião atualizada com sucesso.' });
-    });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
   },
 };
 

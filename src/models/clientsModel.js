@@ -1,27 +1,22 @@
-// Importa a conexão com o banco de dados
-const db = require('../db');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-const Clients = {
-// Função para obter todos os clientes do banco de dados
-  getAll: (callback) => {
-    db.query('SELECT * FROM clients', callback);
+const Client = sequelize.define('clients', {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+    allowNull: false,
   },
-
-  // Função para obter um cliente pelo ID
-  getById: (id, callback) => {
-    db.query('SELECT * FROM clients WHERE id = ?', [id], callback);
+  name: {
+    type: DataTypes.STRING(250),
+    allowNull: false,
   },
-
-  // Função para criar um novo cliente
-  create: (newClient, callback) => {
-    db.query('INSERT INTO clients SET ?', newClient, callback);
+  phone_number: {
+    type: DataTypes.STRING(45),
+    allowNull: false,
   },
-
-  // Função para atualizar um cliente existente
-  update: (id, updatedClient, callback) => {
-    db.query('UPDATE clients SET ? WHERE id = ?', [updatedClient, id], callback);
-  },
-}
+});
 
 // Exporta o modelo do cliente para ser utilizado em outros módulos
-module.exports = Clients;
+module.exports = Client;
