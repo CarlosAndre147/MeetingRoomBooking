@@ -10,8 +10,6 @@ This repository contains the source code for a Meeting Room Booking System imple
 - [Database](#database)
 - [Usage](#usage)
 - [API Routes](#api-routes)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Prerequisites
 
