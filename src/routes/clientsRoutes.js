@@ -1,18 +1,19 @@
+// Importing required modules
 const express = require('express');
 const router = express.Router();
 const ClientsController = require('../controllers/clientsController');
 
-// Rota para obter todas os clientes
+// Route to retrieve all clients
 router.get('/', ClientsController.getAllClients);
 
-// Rota para obter um cliente pelo ID
+// Route to retrieve a client by its ID
 router.get('/:id', ClientsController.getClientById);
 
-// Rota para criar um nova cliente
+// Route to create a new client
 router.post('/', ClientsController.createClient);
 
-// Rota para atualizar um cliente existente
+// Route to update an existing client
 router.put('/:id', ClientsController.updateClient);
 
-// Exporta as rotas para serem utilizadas em outros módulos
+// Exporting the routes for use in other modules
 module.exports = router;

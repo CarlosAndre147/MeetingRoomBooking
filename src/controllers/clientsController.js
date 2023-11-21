@@ -1,25 +1,25 @@
-// Importa o modelo do cliente
+// Import the Client model
 const Clients = require('../models/clientsModel');
 
-// Controlador para lidar com as operações relacionadas aos clientes.
+// Controller to handle operations related to clients.
 const ClientsController = {
-    // Obtém todas os clientes
+    // Get all clients
     getAllClients: async (req, res) => {
         try {
-          const client = await Clients.findAll();
-          res.status(200).json(client);
+          const clients = await Clients.findAll();
+          res.status(200).json(clients);
         } catch (error) {
           console.error(error);
           res.status(500).json({ message: 'Internal Server Error' });
         }
     },
-    // Obtém um cliente pelo ID
+    // Get a client by ID
     getClientById: async (req, res) => {
         try {
           const clientId = req.params.id;
           const client = await Clients.findByPk(clientId);
           if (client == null) {
-            res.status(404).json({message: 'Client not found'});
+            res.status(404).json({ message: 'Client not found' });
           } else {
             res.status(200).json(client);
           }
@@ -28,7 +28,7 @@ const ClientsController = {
           res.status(500).json({ message: 'Internal Server Error' });
         }
     },
-    // Cria um novo Cliente
+    // Create a new client
     createClient: async (req, res) => {
       try {
         const newClient = req.body;
@@ -39,14 +39,13 @@ const ClientsController = {
         res.status(500).json({ message: 'Internal Server Error' });
       }
     },
-
-    // Atualiza um Cliente existente
+    // Update an existing client
     updateClient: async (req, res) => {
         try {
             const clientId = req.params.id;
             const updatedClient = req.body;
-            await Clients.update(updatedClient, {where: {id: clientId}});
-            res.status(200).json({ message: 'Cliente atualizado com sucesso.' });
+            await Clients.update(updatedClient, { where: { id: clientId } });
+            res.status(200).json({ message: 'Client updated successfully.' });
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Internal Server Error' });
@@ -54,6 +53,5 @@ const ClientsController = {
     },
 };
   
-  // Exporta o controlador para ser utilizado em outros módulos
-  module.exports = ClientsController;
-  
+// Export the controller for use in other modules
+module.exports = ClientsController;

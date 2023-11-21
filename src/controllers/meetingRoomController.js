@@ -1,9 +1,9 @@
-// Importa o modelo da sala de reunião
+// Import the MeetingRoom model
 const MeetingRoom = require('../models/meetingRoomModel');
 
-// Controlador para lidar com as operações relacionadas às salas de reunião
+// Controller to handle operations related to meeting rooms
 const MeetingRoomController = {
-  // Obtém todas as salas de reunião
+  // Get all meeting rooms
   getAllMeetingRooms: async (req, res) => {
     try {
       const meetingRooms = await MeetingRoom.findAll();
@@ -13,13 +13,13 @@ const MeetingRoomController = {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   },
-  // Obtém uma sala de reunião pelo ID
+  // Get a meeting room by ID
   getMeetingRoomById: async (req, res) => {
     try {
       const roomId = req.params.id;
       const meetingRoom = await MeetingRoom.findByPk(roomId);
       if (meetingRoom == null) {
-        res.status(404).json({message: 'Meeting room not found'});
+        res.status(404).json({ message: 'Meeting room not found' });
       } else {
         res.status(200).json(meetingRoom);
       }
@@ -28,7 +28,7 @@ const MeetingRoomController = {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   },
-  // Cria uma nova sala de reunião
+  // Create a new meeting room
   createMeetingRoom: async (req, res) => {
     try {
       const newMeetingRoom = req.body;
@@ -39,13 +39,13 @@ const MeetingRoomController = {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   },
-  // Atualiza uma sala de reunião existente
+  // Update an existing meeting room
   updateMeetingRoom: async (req, res) => {
     try {
       const roomId = req.params.id;
       const updatedMeetingRoom = req.body;
-      await MeetingRoom.update(updatedMeetingRoom, {where: {id: roomId}});
-      res.status(200).json({ message: 'Sala de reunião atualizada com sucesso.' });
+      await MeetingRoom.update(updatedMeetingRoom, { where: { id: roomId } });
+      res.status(200).json({ message: 'Meeting room updated successfully.' });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
@@ -53,5 +53,5 @@ const MeetingRoomController = {
   },
 };
 
-// Exporta o controlador para ser utilizado em outros módulos
+// Export the controller for use in other modules
 module.exports = MeetingRoomController;

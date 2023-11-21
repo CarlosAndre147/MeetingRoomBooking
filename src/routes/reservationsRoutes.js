@@ -1,18 +1,19 @@
+// Importing required modules
 const express = require('express');
 const router = express.Router();
 const reservationsController = require('../controllers/reservationsController');
 
-// Rota para obter todas as reservas
+// Route to retrieve all reservations
 router.get('/', reservationsController.getAllReservations);
 
-// Rota para obter uma reserva pelo ID
+// Route to retrieve a reservation by its ID
 router.get('/:id', reservationsController.getReservationById);
 
-// Rota para criar uma nova reserva
+// Route to create a new reservation
 router.post('/', reservationsController.createReservation);
 
-// Rota para atualizar uma reserva existente
+// Route to update an existing reservation
 router.put('/:id', reservationsController.updateReservation);
 
-// Exporta as rotas para serem utilizadas em outros módulos
+// Exporting the routes for use in other modules
 module.exports = router;

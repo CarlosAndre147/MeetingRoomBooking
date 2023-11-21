@@ -1,18 +1,19 @@
+// Importing required modules
 const express = require('express');
 const router = express.Router();
 const MeetingRoomController = require('../controllers/meetingRoomController');
 
-// Rota para obter todas as salas de reunião
+// Route to retrieve all meeting rooms
 router.get('/', MeetingRoomController.getAllMeetingRooms);
 
-// Rota para obter uma sala de reunião pelo ID
+// Route to retrieve a meeting room by its ID
 router.get('/:id', MeetingRoomController.getMeetingRoomById);
 
-// Rota para criar uma nova sala de reunião
+// Route to create a new meeting room
 router.post('/', MeetingRoomController.createMeetingRoom);
 
-// Rota para atualizar uma sala de reunião existente
+// Route to update an existing meeting room
 router.put('/:id', MeetingRoomController.updateMeetingRoom);
 
-// Exporta as rotas para serem utilizadas em outros módulos
+// Exporting the routes for use in other modules
 module.exports = router;

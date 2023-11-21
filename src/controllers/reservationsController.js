@@ -1,9 +1,9 @@
-// Importa o modelo da reserva
+// Import the Reservation model
 const Reservation = require('../models/reservationsModel');
 
-// Controlador para lidar com as operações relacionadas às reservas
+// Controller to handle operations related to reservations
 const ReservationController = {
-  // Obtém todas as reservas
+  // Get all reservations
   getAllReservations: async (req, res) => {
     try {
       const reservations = await Reservation.findAll();
@@ -13,22 +13,22 @@ const ReservationController = {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   },
-  // Obtém uma reserva pelo ID
+  // Get a reservation by ID
   getReservationById: async (req, res) => {
     try {
       const reservationId = req.params.id;
-      const reservations = await Reservation.findByPk(reservationId);
-      if (reservations == null) {
-        res.status(404).json({message: 'Reserva não encontrada'});
+      const reservation = await Reservation.findByPk(reservationId);
+      if (reservation == null) {
+        res.status(404).json({ message: 'Reservation not found' });
       } else {
-        res.status(200).json(reservations);
+        res.status(200).json(reservation);
       }
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
     }
   },
-  // Cria uma nova reserva
+  // Create a new reservation
   createReservation: async (req, res) => {
     try {
       const newReservation = req.body;
@@ -39,13 +39,13 @@ const ReservationController = {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   },
-  // Atualiza uma reserva existente
+  // Update an existing reservation
   updateReservation: async (req, res) => {
     try {
       const reservationId = req.params.id;
       const updatedReservation = req.body;
-      await Reservation.update(updatedReservation, {where: {id: reservationId}});
-      res.status(200).json({ message: 'Reserva atualizada com sucesso.' });
+      await Reservation.update(updatedReservation, { where: { id: reservationId } });
+      res.status(200).json({ message: 'Reservation updated successfully.' });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: 'Internal Server Error' });
@@ -53,5 +53,5 @@ const ReservationController = {
   },
 };
 
-// Exporta o controlador para ser utilizado em outros módulos
+// Export the controller for use in other modules
 module.exports = ReservationController;

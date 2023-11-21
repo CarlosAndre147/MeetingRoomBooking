@@ -1,5 +1,6 @@
+// Importing required modules
 const express = require('express');
-const sequelize = require('./config/db')
+const sequelize = require('./config/db');
 const meetingRoomRoutes = require('./routes/meetingRoomRoutes');
 const clientsRoutes = require('./routes/clientsRoutes');
 const reservationsRoutes = require('./routes/reservationsRoutes');
@@ -8,19 +9,20 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT;
 
-// Middleware to parse JSON
+// Middleware to parse incoming JSON requests
 app.use(express.json());
 
-//Routes
+// Setting up routes for meeting rooms, clients, and reservations
 app.use('/meeting-rooms', meetingRoomRoutes);
-app.use('/clients', clientsRoutes)
-app.use('/reservations', reservationsRoutes)
+app.use('/clients', clientsRoutes);
+app.use('/reservations', reservationsRoutes);
 
-// Sync the models with the database
+// Synchronize the defined Sequelize models with the database
 sequelize.sync().then(() => {
-    console.log('Database synced');
+    console.log('Database synchronized successfully');
 });
 
+// Start the Express server on the specified port
 app.listen(port, () => {
-    console.log(`Servidor rodando na porta ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
