@@ -111,7 +111,7 @@ The server will be running at http://localhost:3000.
 - **PUT `/clients/:id`**: 
   - Update an existing client
 
-## Interactive Registration GUI
+## GUI for Interactive Registration
 
 A simple GUI is available at the root path `/` for interactive registration of clients, meeting rooms, and reservations.
 
