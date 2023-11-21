@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Meeting Room Booking</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/clients" class="nav-button">Clients</a>
+        <a href="/meeting-rooms" class="nav-button">Meeting Rooms</a>
+        <a href="/reservations" class="nav-button">Reservations</a>
+    </nav>
+
+    <div class="container">
+        <form id="myForm" action="/clients" method="post"> 
+            <h4>Client Sign Up</h4>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="phone">Phone Number:</label>
+            <input type="text" id="phone" name="phone_number" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

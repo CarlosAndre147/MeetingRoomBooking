@@ -32,6 +32,7 @@ const ClientsController = {
     createClient: async (req, res) => {
       try {
         const newClient = req.body;
+        console.log(newClient);
         const client = await Clients.create(newClient);
         res.status(200).json(client);
       } catch (error) {
