@@ -32,6 +32,7 @@ const ReservationController = {
   createReservation: async (req, res) => {
     try {
       const newReservation = req.body;
+      console.log(newReservation);
       const reservation = await Reservation.create(newReservation);
       res.status(200).json(reservation);
     } catch (error) {

@@ -10,6 +10,8 @@ This repository contains the source code for a Meeting Room Booking System imple
 - [Database](#database)
 - [Usage](#usage)
 - [API Routes](#api-routes)
+- [GUI for Interactive Registration](#gui-for-interactive-registration)
+- [License](#license)
 
 ## Prerequisites
 
@@ -108,3 +110,19 @@ The server will be running at http://localhost:3000.
   
 - **PUT `/clients/:id`**: 
   - Update an existing client
+
+## Interactive Registration GUI
+
+A simple GUI is available at the root path `/` for interactive registration of clients, meeting rooms, and reservations.
+
+- **Access the GUI at [http://localhost:3000/](http://localhost:3000/)**
+- The GUI provides forms for creating new entries:
+  - **Client Registration**
+  - **Meeting Room Registration**
+  - **Reservation Registration**
+
+**Note:** The GUI uses the same routes as the API to handle form submissions.
+
+## License
+
+This project is licensed under the MIT License.

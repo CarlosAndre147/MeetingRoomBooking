@@ -3,26 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/styles.css">
-    <title>Meeting Room Booking</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Interactive Registration</title>
 </head>
 <body>
-    <nav class="navbar">
-        <a href="/clients" class="nav-button">Clients</a>
-        <a href="/meeting-rooms" class="nav-button">Meeting Rooms</a>
-        <a href="/reservations" class="nav-button">Reservations</a>
-    </nav>
 
-    <div class="container">
-        <form id="myForm" action="/clients" method="post"> 
-            <h4>Client Sign Up</h4>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+<div class="navbar">
+    <a href="/clients" class="nav-button">Clients</a>
+    <a href="/meeting-rooms" class="nav-button">Meeting Rooms</a>
+    <a href="/reservations" class="nav-button">Reservations</a>
+</div>
 
-            <label for="phone">Phone Number:</label>
-            <input type="text" id="phone" name="phone_number" required>
+<div class="container">
+    <div class="form-container fade-in">
+        <h2>Client Registration</h2>
+        <form action="/clients" method="post">
+            <label for="clientName">Name:</label>
+            <input type="text" id="clientName" name="name" required>
+
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phone_number" required>
+
             <button type="submit">Submit</button>
         </form>
     </div>
+
+    <div class="form-container fade-in">
+        <h2>Meeting Room Registration</h2>
+        <form action="/meeting-rooms" method="post">
+            <label for="roomName">Name:</label>
+            <input type="text" id="roomName" name="name" required>
+
+            <label for="capacity">Capacity:</label>
+            <input type="number" id="capacity" name="capacity" required>
+
+            <label for="localization">Localization:</label>
+            <input type="text" id="localization" name="localization" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="form-container fade-in">
+        <h2>Reservation Registration</h2>
+        <form action="/reservations" method="post">
+            <label for="reservationDate">Date:</label>
+            <input type="datetime-local" id="reservationDate" name="date" required>
+
+            <label for="clientId">Client ID:</label>
+            <input type="text" id="clientId" name="clientId" required>
+
+            <label for="meetingRoomId">Meeting Room ID:</label>
+            <input type="text" id="meetingRoomId" name="meetingRoomId" required>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div> 
+</div>
+
 </body>
 </html>
